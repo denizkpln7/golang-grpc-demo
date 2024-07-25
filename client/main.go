@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 
+	pb "github.com/deniz/grpc-demo/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	pb "grpc/proto"
 )
 
 const (
@@ -25,8 +25,8 @@ func main() {
 	//	Names: []string{"Akhil", "Alice", "Bob"},
 	//}
 
-	callSayHello(client)
-	//callSayHelloServerStream(client, names)
-	//callSayHelloClientStream(client, names)
-	//callSayHelloBidirectionalStream(client, names)
+	//saveUser(client)
+	//GetUsersEmail(client)
+	//GetIdUserMail(client)
+	GetAlllUser(client)
 }

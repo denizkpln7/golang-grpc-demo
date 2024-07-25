@@ -7,33 +7,38 @@ option go_package = "./proto";
 // package name for our proto file
 package greet_service;
 
-
+// defining all the Services for the gRPC
 service GreetService {
-
-  rpc SayHello(NoParam) returns (HelloResponse);
-
-  rpc SayHelloServerStreaming(NamesList) returns (stream HelloResponse);
-
-  rpc SayHelloClientStreaming(stream HelloRequest) returns (MessagesList);
-
-  rpc SayHelloBidirectionalStreaming(stream HelloRequest) returns (stream HelloResponse);
+   rpc SaveUser(SaveRequest) returns (User);
+   rpc GetUsersEmail(stream SaveRequest) returns (User);
+   rpc GetIdUserMail (User)  returns (stream SaveRequest);
+   rpc GetAlllUser (stream SaveRequest) returns (stream User);
 }
+
 
 message NoParam {};
 
-message HelloRequest {
-  string name = 1;
+message SaveRequest {
+    string name = 1;
+    string surName = 2;
+    string email = 3;
+
 }
 
-message HelloResponse {
-  string message = 1;
+message User {
+    int64 id=1;
+    string name = 2;
+    string surName = 3;
+    string email = 4;
 }
 
-message NamesList {
-  repeated string names = 1;
+message UserOrder {
+    int64 userId=1;
+    repeated string names = 2;
 }
 
-message MessagesList {
-  repeated string messages = 1;
+message WantedList {
+    repeated string messages = 1;
 }
+
 

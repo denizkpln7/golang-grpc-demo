@@ -4,8 +4,8 @@ import (
 	"log"
 	"net"
 
+	pb "github.com/deniz/grpc-demo/proto"
 	"google.golang.org/grpc"
-	pb "grpc/proto"
 )
 
 // define the port
@@ -13,10 +13,11 @@ const (
 	port = ":8080"
 )
 
-// this is the struct to be created, pb is imported upstairs
-type helloServer struct {
+type userServer struct {
 	pb.GreetServiceServer
 }
+
+//this is the struct to be created, pb is imported upstairs
 
 func main() {
 	//listen on the port
@@ -27,7 +28,7 @@ func main() {
 	// create a new gRPC server
 	grpcServer := grpc.NewServer()
 	// register the greet service
-	pb.RegisterGreetServiceServer(grpcServer, &helloServer{})
+	pb.RegisterGreetServiceServer(grpcServer, &userServer{})
 	log.Printf("Server started at %v", lis.Addr())
 	//list is the port, the grpc server needs to start there
 	if err := grpcServer.Serve(lis); err != nil {
